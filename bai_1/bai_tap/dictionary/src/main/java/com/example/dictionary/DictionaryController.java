@@ -1,6 +1,7 @@
 package com.example.dictionary;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,21 +23,36 @@ public class DictionaryController {
     public String showForm(){
         return "home-dic";
     }
+//    @PostMapping("/dic")
+//    public ModelAndView translate(@RequestParam("word") String word){
+//        ModelAndView modelAndView = new ModelAndView("home-dic");
+//        modelAndView.addObject("word",word);
+//        boolean checkNull = true;
+//        for (Map.Entry<String,String> entry: dic.entrySet()){
+//            if (entry.getKey().equals(word)){
+//                modelAndView.addObject("result",entry.getValue());
+//                checkNull = false;
+//            }
+//        }
+//        if (checkNull){
+//            modelAndView.addObject("result","Không tìm thấy");
+//        }
+//        return modelAndView;
+//    }
     @PostMapping("/dic")
-    public ModelAndView translate(@RequestParam("word") String word){
-        ModelAndView modelAndView = new ModelAndView("home-dic");
-        modelAndView.addObject("word",word);
+    public String translate(Model model, @RequestParam("word") String word){
+        model.addAttribute("word",word);
         boolean checkNull = true;
         for (Map.Entry<String,String> entry: dic.entrySet()){
-            if (entry.getKey().equals(word)){
-                modelAndView.addObject("result",entry.getValue());
+            if (entry.getKey().equalsIgnoreCase(word)){
+                model.addAttribute("result",entry.getValue());
                 checkNull = false;
             }
         }
         if (checkNull){
-            modelAndView.addObject("result","Không tìm thấy");
+            model.addAttribute("result","Không tìm thấy");
         }
-        return modelAndView;
+        return "home-dic";
     }
 
 }
