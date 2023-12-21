@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Danh sách học sinh</h3>
+<div>
+    <p th:text="${message}"></p>
+</div>
+<div>
+    <table id="students">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Giới tính</th>
+            <th>Tuổi</th>
+            <th>Địa chỉ</th>
+            <th>Chỉnh sửa</th>
+            <th>Xóa</th>
+            <th>Chi tiết</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student,loop:${students}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.gender}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.address}"></td>
+            <td>
+                <a th:href="@{/student/{id}/edit(id=${student.getId()})}" class="btn btn-sm btn-outline-primary">Chỉnh sửa</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        th:attr="data-student-id=${student.getId()} , data-student-name=${student.getName()} "
+                        onclick="deleteStudent(this)">
+                    Xóa
+                </button>
+            </td>
+            <td>
+<!--                <a th:href="@{/students/{id}/detail(id=${student.getId()})}"></a>-->
+                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#detailModal"
+                        th:attr="id=${student.getId()} ,name=${student.getName()},gender = ${student.gender},age = ${student.age},address=${student.address}"
+                        onclick="showDetailStudent(this)">
+                    Chi tiết
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/students/delete}" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete customer:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete <span id="nameEdit"></span>?
+                    <input type="hidden" id="idEdit" name="idEdit" value="idEdit">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detailModalLabel">Detail student:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idDetail" name="idDetail" value="idDetail">
+
+                    <table class="table table-cell">
+<!--                        <tr>-->
+<!--                            <th>ID</th>-->
+<!--                            <td><span id="idDetail"></span></td>-->
+<!--                        </tr>-->
+
+                        <tr>
+                            <th>Tên</th>
+                            <td> <span id="nameDetail"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Giới tính</th>
+                            <td> <span id="genderDetail"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Tuổi</th>
+                            <td> <span id="ageDetail"></span> </td>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ</th>
+                            <td> <span id="addressDetail"></span> </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<!--                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>-->
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function deleteStudent(button) {
+        var id = button.getAttribute('data-student-id');
+        var name = button.getAttribute('data-student-name');
+        document.getElementById("idEdit").value = id;
+        document.getElementById("nameEdit").innerText = name;
+    }
+    function showDetailStudent(button){
+        let id = button.getAttribute('id');
+        let name = button.getAttribute('name');
+        let gender = button.getAttribute('gender');
+        let age = button.getAttribute('age');
+        let address = button.getAttribute('address');
+        document.getElementById("idDetail").value = id;
+        document.getElementById("nameDetail").innerText = name;
+        document.getElementById("genderDetail").innerText = gender;
+        document.getElementById("ageDetail").innerText = age;
+        document.getElementById("addressDetail").innerText = address;
+    }
+
+</script>
+<footer th:replace="layout::footer">
+
+</footer>
+</body>
+</html>

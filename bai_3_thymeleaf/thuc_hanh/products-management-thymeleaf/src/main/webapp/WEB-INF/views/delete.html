@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Xóa</title>
+</head>
+<body>
+<h3>Xóa sản phẩm</h3>
+<div>
+    <a th:href="@{/products}">Quay lại trang chủ</a>
+</div>
+<div>
+    <form th:action="@{/products/delete}" method="post" novalidate="novalidate" th:object="${product}">
+        <input type="hidden" th:field="*{id}">
+        <table id="products">
+            <tr>
+                <th>Tên</th>
+<!--                <td th:text="*{name}"></td>-->
+                <td>
+                    <input type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <th>Giá</th>
+<!--                <td th:text="*{price}"></td>-->
+                <td>
+                    <input type="text" th:field="*{price}">
+
+                </td>
+
+            </tr>
+            <tr>
+                <th>Mô tả</th>
+<!--                <td th:text="*{detail}"></td>-->
+                <td>
+                    <input type="text" th:field="*{detail}">
+
+                </td>
+
+            </tr>
+            <tr>
+                <th>Nhà sản xuất</th>
+<!--                <td th:text="*{manufacturer}"></td>-->
+                <td>
+                    <input type="text" th:field="*{manufacturer}">
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Xóa">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<footer th:replace="layout::footer">
+
+</footer>
+</body>
+</html>

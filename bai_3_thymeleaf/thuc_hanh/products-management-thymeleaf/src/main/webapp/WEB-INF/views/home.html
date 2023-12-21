@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h3>Danh sách sản phẩm</h3>
+<div>
+    <a th:href="@{/products/create}">Thêm mới</a>
+    <a th:href="@{products/search}">Tìm kiếm</a>
+</div>
+<div class="notify">
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+<div >
+    <table id="products">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Mô tả</th>
+            <th>Nhà sản xuất</th>
+            <th>Chỉnh sửa</th>
+            <th>Xóa</th>
+            <th>Chi tiết</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product,loop: ${products}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${product.getName()}"></td>
+            <td th:text="${product.getPrice()}"></td>
+            <td th:text="${product.getDetail()}"></td>
+            <td th:text="${product.getManufacturer()}"></td>
+            <td>
+                <a th:href="@{products/{id}/edit(id=${product.getId()})}">Chỉnh sửa</a>
+            </td>
+            <td>
+                <a th:href="@{products/{id}/delete(id=${product.getId()})}">Xóa sản phẩm</a>
+            </td>
+            <td>
+                <a th:href="@{products/{id}/detail(id=${product.getId()})}">Xem chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

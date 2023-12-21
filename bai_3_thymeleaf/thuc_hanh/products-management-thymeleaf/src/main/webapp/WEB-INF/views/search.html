@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="text-align: center">
+  <h3>Tìm kiếm sản phẩm</h3>
+  <form th:action="@{/products/search}" method="post" style="width: 30%;padding-left: 35%">
+    <input type="text" name="name">
+    <input type="submit" value="Tìm kiếm">
+  </form>
+</div>
+<p th:if="${products.isEmpty()}">Không có sản phẩm tương tự</p>
+<div th:if="${!products.isEmpty()}">
+  <table id="products">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên</th>
+      <th>Giá</th>
+      <th>Mô tả</th>
+      <th>Nhà sản xuất</th>
+      <th>Chỉnh sửa</th>
+      <th>Xóa</th>
+      <th>Chi tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product,loop: ${products}">
+      <td th:text="${loop.count}"></td>
+      <td th:text="${product.getName()}"></td>
+      <td th:text="${product.getPrice()}"></td>
+      <td th:text="${product.getDetail()}"></td>
+      <td th:text="${product.getManufacturer()}"></td>
+      <td>
+        <a th:href="@{{id}/edit(id=${product.getId()})}">Chỉnh sửa</a>
+      </td>
+      <td>
+        <a th:href="@{{id}/delete(id=${product.getId()})}">Xóa sản phẩm</a>
+      </td>
+      <td>
+        <a th:href="@{{id}/detail(id=${product.getId()})}">Xem chi tiết</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<footer th:replace="layout::footer">
+
+</footer>
+</body>
+</html>

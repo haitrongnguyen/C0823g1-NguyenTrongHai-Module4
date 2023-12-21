@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Xóa khách hàng</title>
+</head>
+<body>
+<h3>Xóa khách hàng</h3>
+<p>
+    <a th:href="@{/customers}">Quay lại trang chủ</a>
+</p>
+<div id="form">
+    <form th:action="@{/customers/delete}" method="post" th:object="${customer}" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label for="name">Tên</label>
+            <input type="text" id="name" th:field="*{name}">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" th:field="*{email}">
+        </div>
+        <div>
+            <label for="address">Địa chỉ</label>
+            <input type="text" id="address" th:field="*{address}">
+        </div>
+        <input type="submit" value="Xóa">
+    </form>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

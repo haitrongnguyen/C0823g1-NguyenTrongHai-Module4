@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Thông tin khách hàng</title>
+</head>
+<body>
+<h3>Thông tin khách hàng</h3>
+<p>
+    <a th:href="@{/customers}">Quay lại trang chủ</a>
+</p>
+<div class="detail">
+    <div class="cus-detail">
+        <label>Tên: </label>
+        <label th:text="${customer.name}"></label>
+    </div>
+    <div class="cus-detail">
+        <label>Email: </label>
+
+        <label th:text="${customer.email}"></label>
+    </div>
+    <div class="cus-detail">
+        <label>Địa chỉ: </label>
+
+        <label th:text="${customer.address}"></label>
+    </div>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Danh sách khách hàng</title>
+</head>
+<body>
+<h3>Danh sách khách hàng</h3>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<p>
+    <a th:href="@{customers/create}">
+        Thêm khách hàng mới
+    </a>
+</p>
+<table id="customers">
+    <thead>
+    <tr>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Địa chỉ</th>
+        <th>Chỉnh sửa</th>
+        <th>Xóa</th>
+        <th>Chi tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer,loop : ${customers}">
+        <td th:text="${customer.getName()}"></td>
+        <td th:text="${customer.getEmail()}"></td>
+        <td th:text="${customer.getAddress()}"></td>
+        <td>
+            <a th:href="@{/customers/{id}/edit(id=${customer.getId()})}">edit</a>
+        </td>
+        <td>
+            <a th:href="@{/customers/{id}/delete(id=${customer.getId()})}">delete</a>
+        </td>
+        <td>
+            <a th:href="@{/customers/{id}/detail(id=${customer.getId()})}">detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>
