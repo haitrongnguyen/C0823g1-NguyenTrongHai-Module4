@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Box</title>
+</head>
+<body>
+<h3>Settings</h3>
+<form th:action="@{/mailbox/update}" th:object="${mailBox}" method="post">
+    <table>
+        <tr>
+            <th>Languages</th>
+            <td th:text="${mailBox.language}"></td>
+<!--            <td>-->
+<!--                <select name="lg" th:field="*{language}">-->
+<!--                    <option th:each="lg,st:${languages}" th:text="${lg}"></option>-->
+<!--                </select>-->
+<!--            </td>-->
+        </tr>
+        <tr>
+            <th>Page Size</th>
+            <td th:text="${mailBox.pageSize}"></td>
+<!--            <td>-->
+<!--                Show-->
+<!--                <select name="pageSize">-->
+<!--                    <option th:each="p:${pageSize}" th:text="${p}"></option>-->
+<!--                </select>-->
+<!--                emails per page.-->
+<!--            </td>-->
+        </tr>
+        <tr>
+            <th>Spams filter</th>
+            <td th:text="${mailBox.spamsFilter == true ? 'Yes' : 'No'}"></td>
+        </tr>
+        <tr>
+            <th>Signature</th>
+            <td th:text="${mailBox.signature}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a th:href="@{/mailbox/update}">Update</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

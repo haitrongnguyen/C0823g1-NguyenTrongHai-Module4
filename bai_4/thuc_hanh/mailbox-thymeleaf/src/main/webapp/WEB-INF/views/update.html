@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form{
+            width: 50%;
+            padding-left: 25%;
+        }
+        th,td{
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">Settings</h1>
+<form th:action="@{/mailbox/update}" th:object="${mailBox}" method="post">
+  <table>
+    <tr>
+      <th>Languages</th>
+                  <td>
+                      <select th:field="*{language}" style="width: 100%">
+                          <option th:each="lg:${languages}" th:value="${lg}" th:text="${lg}"></option>
+                      </select>
+                  </td>
+    </tr>
+      <tr></tr>
+    <tr>
+      <th>Page Size</th>
+                  <td>
+                      Show
+                      <label><select th:field="*{pageSize}">
+                          <option th:each="pS:${pageSize}" th:value="${pS}" th:text="${pS}"></option>
+                      </select></label>
+                      emails per page.
+                  </td>
+    </tr>
+      <tr></tr>
+    <tr>
+      <th><label for="filter">Spams filter</label> </th>
+      <td>
+          <input id="filter" type="checkbox" th:field="*{spamsFilter}"> Enable spams filter
+      </td>
+    </tr>
+    <tr>
+      <th>Signature</th>
+      <td>
+          <label><textarea th:field="*{signature}" cols="30" rows="5">
+          </textarea></label>
+      </td>
+    </tr>
+      <tr>
+
+      </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit" style="background: blue;color: white">Update</button>
+          <span><button type="button">Cancel</button></span>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
