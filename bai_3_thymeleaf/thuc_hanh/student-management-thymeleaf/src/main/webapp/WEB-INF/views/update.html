@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 style="text-align: center">Chỉnh sửa thông tin nhân viên</h3>
+<div id="form" style="margin-left: 35%">
+    <form th:object="${student}" method="post">
+        <div>
+            <label for="name">Tên: </label>
+            <input type="text" th:field="*{name}" id="name">
+        </div>
+        <div>
+            <label for="gender">Giới tính: </label>
+            <select th:field="*{gender}" id="gender" style="width: 100%">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Khác">Khác</option>
+            </select>
+        </div>
+        <div>
+            <label for="age">Tuổi: </label>
+            <input type="text" th:field="*{age}" id="age">
+        </div>
+        <div>
+            <label for="address">Địa chỉ: </label>
+            <input type="text" th:field="*{address}" id="address">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Lưu" style="width: 100% !important;">
+    </form>
+</div>
+
+</body>
+</html>

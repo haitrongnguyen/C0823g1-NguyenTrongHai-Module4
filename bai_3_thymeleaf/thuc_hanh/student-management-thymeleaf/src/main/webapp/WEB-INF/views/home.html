@@ -9,6 +9,7 @@
 <div>
     <p th:text="${message}"></p>
 </div>
+<a th:href="@{/students/create}">Thêm mới</a>
 <div>
     <table id="students">
         <thead>
@@ -31,11 +32,11 @@
             <td th:text="${student.age}"></td>
             <td th:text="${student.address}"></td>
             <td>
-                <a th:href="@{/student/{id}/edit(id=${student.getId()})}" class="btn btn-sm btn-outline-primary">Chỉnh sửa</a>
+                <a th:href="@{/students/{id}/edit(id=${student.getId()})}" class="btn btn-sm btn-outline-primary">Chỉnh sửa</a>
             </td>
             <td>
                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                        data-bs-target="#editModal"
+                        data-bs-target="#deleteModal"
                         th:attr="data-student-id=${student.getId()} , data-student-name=${student.getName()} "
                         onclick="deleteStudent(this)">
                     Xóa

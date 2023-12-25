@@ -20,8 +20,8 @@
     <label for="word">Nhập từ cần dịch</label>
     <input id="word" name="word" type="text" required>
     <input type="submit" value="Dịch"><br>
-    <h5>Từ cần dịch: ${word}</h5>
-    <h5>Kết quả: ${result}</h5>
+    <h5>Từ cần dịch: <span style="color: blue">${word}</span></h5>
+    <h5>Kết quả: <span style="color: blue">${result}</span></h5>
   </fieldset>
 </form>
 </body>

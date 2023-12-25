@@ -20,4 +20,14 @@ public class StudentService implements IStudentService{
     public void delete(int id) {
         studentRepository.delete(id);
     }
+
+    @Override
+    public Student findStudentById(int id) {
+        return studentRepository.findStudentById(id);
+    }
+
+    @Override
+    public void update(int id, Student student1) {
+        studentRepository.update(id,student1);
+    }
 }

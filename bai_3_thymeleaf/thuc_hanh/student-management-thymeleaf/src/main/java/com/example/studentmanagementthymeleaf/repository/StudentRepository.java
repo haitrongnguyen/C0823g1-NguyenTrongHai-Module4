@@ -28,4 +28,14 @@ public class StudentRepository implements IStudentRepository{
     public void delete(int id) {
         map.remove(id);
     }
+
+    @Override
+    public Student findStudentById(int id) {
+        return map.get(id);
+    }
+
+    @Override
+    public void update(int id, Student student1) {
+        map.put(id,student1);
+    }
 }
