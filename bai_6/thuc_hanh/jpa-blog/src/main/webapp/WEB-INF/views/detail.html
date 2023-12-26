@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Blogs</h3>
+<div style="width: 50%; margin-left: 25%">
+    <h4 th:text="${blog.name}" style="text-align: center"></h4>
+    <p th:text="${blog.content}"></p>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>
