@@ -19,6 +19,14 @@
         <label for="content">Enter the content</label><br>
         <textarea id="content" th:field="*{content}" cols="150" rows="25"></textarea>
     </div>
+    <div>
+        <select th:field="*{category.id}" name="category" id="category">
+            <option th:each="c:${categories}" th:value="${c.id}" th:text="${c.name}" th:selected="${c.id == blog.category.id}"></option>
+        </select>
+    </div>
+            <!--    <div>-->
+            <!--        <p th:text="${blog.category.id}"></p>-->
+            <!--    </div>-->
     <input type="submit" value="Save">
 </form>
 <footer th:replace="layout::footer"></footer>

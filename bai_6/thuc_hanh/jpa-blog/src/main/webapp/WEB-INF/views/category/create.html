@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/categories/create}" th:object="${category}">
+    <input type="hidden" th:field="*{id}">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}">
+    </div>
+</form>
+</body>
+</html>

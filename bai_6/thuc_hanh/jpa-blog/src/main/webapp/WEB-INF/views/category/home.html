@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>STT</th>
+    </tr>
+    <tr th:each="c,l:${categories}">
+        <td th:text="${l.count}"></td>
+        <td th:text="${c.name}"></td>
+        <td>
+            <a th:href="@{/categories/{id}/edit(id=${c.getId()})}">Edit</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

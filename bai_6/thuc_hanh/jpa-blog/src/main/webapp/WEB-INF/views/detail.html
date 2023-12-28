@@ -8,6 +8,7 @@
 <h3>Blogs</h3>
 <div style="width: 50%; margin-left: 25%">
     <h4 th:text="${blog.name}" style="text-align: center"></h4>
+    <h5 style="text-align: center">Category: <span th:text="${blog.category.name}"></span></h5>
     <p th:text="${blog.content}"></p>
 </div>
 <footer th:replace="layout::footer"></footer>
