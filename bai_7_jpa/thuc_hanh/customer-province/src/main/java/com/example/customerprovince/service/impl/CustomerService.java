@@ -1,7 +1,8 @@
-package com.example.customerprovince.service;
+package com.example.customerprovince.service.impl;
 
 import com.example.customerprovince.model.Customer;
 import com.example.customerprovince.repository.ICustomerRepository;
+import com.example.customerprovince.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository customerRepository;
     @Override
     public List<Customer> findAll() {
-        return customerRepository.findAll();
+        return (List<Customer>) customerRepository.findAll();
     }
 
     @Override

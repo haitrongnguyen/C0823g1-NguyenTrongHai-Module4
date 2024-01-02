@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<h3>Danh sách sản phẩm</h3>
+<div>
+    <a th:href="@{/product/add}">Thêm sản phẩm</a>
+</div>
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-4 g-3" >
+        <div class="col" th:each="p:${products}">
+            <div  class="card bg-success border-primary" style="height: 30rem;">
+                <img th:src="${p.image}" class="card-img-top" style="width: 100%;height: 50%" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${p.name}"></h5>
+                    <p>Price: <span class="card-text" th:text="${p.price}"></span> VNĐ</p>
+                    <p>Description: <span class="card-text" th:text="${p.description}"></span></p>
+                    <a th:href="@{/product/{id}/addToCart(id=${p.id})}" class="btn btn-primary">Add to cart</a>
+                    <div>
+                        <a th:href="@{/product/{id}/edit(id=${p.id})}" class="btn btn-sm btn-warning">Edit</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-danger"
+                           data-bs-toggle="modal"
+                           data-bs-target="#deleteModal"
+                           th:attr="id=${p.getId()} , name=${p.getName()} "
+                           onclick="deleteProduct(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!--<div>-->
+<!--    <a th:if="${products.hasPrevious()}" th:href="@{/product(page = ${products.number - 1})}">Previous</a>-->
+<!--    <span th:text="${products.number +1 }"></span>/<span th:text="${products.totalPages}"></span>-->
+<!--    <a th:if="${products.hasNext()}" th:href="@{/product(page = ${products.number + 1})}">Next</a>-->
+<!--</div>-->
+<nav aria-label="..." th:if="${products.getTotalPages() > 1}">
+    <ul class="pagination pagination-circle">
+        <li class="page-item" th:if="${products.hasPrevious()}">
+            <a class="page-link" th:href="@{/product(page=${products.number - 1})}">Previous</a>
+        </li>
+        <div th:each="item, loop : ${#numbers.sequence(1, products.totalPages )}">
+            <div th:if="${products.number + 1 == item}">
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" th:href="@{/product(page=${item - 1})}" th:text="${item}"><span
+                            class="visually-hidden">(current)</span></a>
+                </li>
+            </div>
+            <div th:unless="${products.number + 1 == item}">
+                <li class="page-item"><a class="page-link" th:href="@{/product(page=${item - 1})}"
+                                         th:text="${item}"></a></li>
+            </div>
+
+        </div>
+        <li class="page-item" th:if="${products.hasNext()}">
+            <a class="page-link" th:href="@{/product(page=${products.number + 1})}">Next</a>
+        </li>
+    </ul>
+</nav>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/product/delete}" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete product:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete <span id="nameDelete"></span>?
+                    <input type="hidden" id="idDelete" name="idDelete" value="idDelete">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+<script>
+    function deleteProduct(button) {
+        let id = button.getAttribute('id');
+        let name = button.getAttribute('name');
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText = name;
+    }
+</script>
+</html>

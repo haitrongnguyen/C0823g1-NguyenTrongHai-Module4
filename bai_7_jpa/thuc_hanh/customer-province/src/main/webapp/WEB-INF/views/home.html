@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>abc</title>
 </head>
 <body>
-$END$
+<table>
+    <tr>
+        <th>STT</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Province</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="c,l: ${customers}">
+        <td th:text="${l.count}"></td>
+        <td th:text="${c.firstName}"></td>
+        <td th:text="${c.lastName}"></td>
+        <td th:text="${c.getProvince().name}">
+        </td>
+        <td>
+            <a th:href="@{/customers/{id}/edit(id=${c.getId()})}"></a>
+        </td>
+        <td>
+            <a th:href="@{/customers/{id}/delete(id=${c.getId()})}"></a>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

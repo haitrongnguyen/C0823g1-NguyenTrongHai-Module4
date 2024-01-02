@@ -1,13 +1,14 @@
-package com.codegym.customer_province_management.service;
+package com.codegym.customer_province_management.service.impl;
 
 import com.codegym.customer_province_management.model.Province;
 import com.codegym.customer_province_management.repository.IProvinceRepository;
+import com.codegym.customer_province_management.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
-public class ProvinceService implements IProvinceService{
+public class ProvinceService implements IProvinceService {
     @Autowired
     private IProvinceRepository iProvinceRepository;
 

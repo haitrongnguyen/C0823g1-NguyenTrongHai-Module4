@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Sửa</th>
+    </tr>
+    <tr th:each="p,l:${provinces}">
+        <td th:text="${l.count}"></td>
+        <td th:text="${p.name}"></td>
+        <td>
+            <a th:href="@{/provinces}">Edit</a>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

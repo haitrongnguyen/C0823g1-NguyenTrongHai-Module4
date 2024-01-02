@@ -1,8 +1,9 @@
-package com.codegym.customer_province_management.service;
+package com.codegym.customer_province_management.service.impl;
 
 import com.codegym.customer_province_management.model.Customer;
 import com.codegym.customer_province_management.model.Province;
 import com.codegym.customer_province_management.repository.ICustomerRepository;
+import com.codegym.customer_province_management.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository iCustomerRepository;
     @Override
